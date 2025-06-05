@@ -63,18 +63,13 @@ message(STATUS "The host processor is ${CMAKE_HOST_SYSTEM_PROCESSOR}")
 message(STATUS "Building for a ${CMAKE_SYSTEM_NAME} system")
 message(STATUS "The target processor is ${CMAKE_SYSTEM_PROCESSOR}")
 
-# Get rid of cmake RPATH warning on OSX
-if(APPLE)
-    set(CMAKE_MACOSX_RPATH OFF)
-endif()
-
 #-----------------------------------------------------------------------------
 # Location of additional CMake scripts
 #-----------------------------------------------------------------------------
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
-include(GetGitRevisionDescription)
-get_git_head_revision(GIT_REFSPEC VCS_REVISION)
+# include(GetGitRevisionDescription)
+# get_git_head_revision(GIT_REFSPEC VCS_REVISION)
 
 if("${VCS_REVISION}" MATCHES ".*-NOTFOUND$")
     set(VCS_REVISION "")
@@ -99,7 +94,7 @@ set(CTEST_MEMORYCHECK_COMMAND "/usr/bin/valgrind")
 set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "-v --tool=memcheck --leak-check=full --track-fds=yes --num-callers=50 --show-reachable=yes --track-origins=yes --malloc-fill=0xff --free-fill=0xfe")
 
 if (NOT WIN32)
-	option(USE_CCACHE "Build using ccache compiler driver" OFF) 
+	option(USE_CCACHE "Build using ccache compiler driver" OFF)
 
 	if (USE_CCACHE)
 		find_program(CCACHE_EXE ccache)
@@ -227,8 +222,8 @@ else()
 endif()
 
 #------------------------------------------------------------
-# Copy data directory to BUILD tree 
-# Install data directory 
+# Copy data directory to BUILD tree
+# Install data directory
 # Install sample template_project
 # Install blender import script
 #------------------------------------------------------------
